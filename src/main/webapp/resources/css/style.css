@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+
+.table-authors{
+	font-family: fantasy;
+	background-color: aqua;
+	border: medium;
+}
+
+.all{
+	height: auto; 
+}
+
+.login{
+	height: 600px;
+	width: 600px;
+	margin: 100px;
+
+}
+
+.addUser{
+	height: 250px;
+	width: 600px;
+	margin: 100px;
+
+}
+
+#background{
+
+	background-color: gray;
+	height: 600px;
+	width: 800px;
+
+}
+
+#playMusicButton{
+	background-color: #101010;
+	padding-top: 0px;
+}
+
+#searchBlock{
+	padding-left: 30px;
+}
+
+.home{
+	background-color: #540F1C;
+
+}
+
+.navbar{
+	margin-bottom: 0px;
+}
+
+#imgProduct{
+	background-size: 100% auto;
+	display: inline-block;
+
+}
+
+.row {
+    margin-top: 30px;
+}
+
+.product-image>img{
+	height: 100%;
+	width: 100%;
+}
+
+.list-group{
+	width: 300px;
+}
+#afc{
+	color: white;
+	width: 100px;
+	padding-top: 6px;
+}
+#logout{
+	padding-top: 0px;
+	padding-bottom: 3px;
+}
+#login{
+	padding-top: 10px;
+}
+
+
