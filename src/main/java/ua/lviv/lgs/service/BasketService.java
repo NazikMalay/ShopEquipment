@@ -13,6 +13,7 @@ public interface BasketService {
 	
 	List<Basket> getAllBasket();
 	
-//	public Basket findBasketByUserId(String userId);
+	Basket getBasketByUserId(int userId);
+	
 	
 }

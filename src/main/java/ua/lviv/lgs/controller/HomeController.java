@@ -15,19 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ua.lviv.lgs.dao.ProductDao;
 import ua.lviv.lgs.dto.SingleProductDTO;
 import ua.lviv.lgs.service.ProductService;
-import ua.lviv.lgs.service.UserService;
 
 
 @Controller
 public class HomeController {
 
-	@Autowired
-	private ProductDao productDao;
-	@Autowired
-	private UserService userService;
+	
 	@Autowired
 	private ProductService productService;
 	

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import ua.lviv.lgs.dao.BasketDao;
 import ua.lviv.lgs.entity.Basket;
@@ -19,25 +18,25 @@ public class BasketServiceImpl implements BasketService{
 	private BasketDao basketDao;
 
 	public void addBasket(User user) {
-		// TODO Auto-generated method stub
-		
+	Basket basket = new Basket(user);
+	basketDao.saveAndFlush(basket);
 	}
 
 	public void dellBasket(User user) {
-		// TODO Auto-generated method stub
+		Basket basket = basketDao.findByUser(user.getIdUser());
+		basketDao.delete(basket);
 		
 	}
 
 	public List<Basket> getAllBasket() {
-		// TODO Auto-generated method stub
-		return null;
+		return basketDao.findAll();
 	}
 
-//	@Transactional
-//	public Basket findBasketByUserId(String userId) {
-//		
-//		return basketDao.findByUser(userId);
-//	}
+	public Basket getBasketByUserId(int userId) {
+		return basketDao.findByUser(userId);
+	}
+
+
 	
 	
 	

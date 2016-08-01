@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.lviv.lgs.dto.ProductFormDTO;
 import ua.lviv.lgs.dto.SingleProductDTO;
-import ua.lviv.lgs.service.FirmService;
 import ua.lviv.lgs.service.ProductService;
 
 @Controller
@@ -21,9 +20,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private FirmService firmService;
-
+	
 	
 	
 	@RequestMapping(value = "/productPage={pageNumber}", method = RequestMethod.GET)
