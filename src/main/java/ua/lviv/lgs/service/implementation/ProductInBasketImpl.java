@@ -95,7 +95,6 @@ public class ProductInBasketImpl implements ProductInBasketService {
 		List<ProductInBasketDTO> endList = new ArrayList<ProductInBasketDTO>();
 
 		List<ProductInBasket> listWithAll = productInBasketDao.findAll();
-		System.out.println("allProductinbasket list" + listWithAll);
 
 		for (ProductInBasket productInBasket : listWithAll) {
 			if (productInBasket.getIdBasket().getIdBusket().equals(idBasket)) {
@@ -103,8 +102,7 @@ public class ProductInBasketImpl implements ProductInBasketService {
 						productInBasket.getIdProduct().getModel(),
 						productInBasket.getIdProduct().getFirm().getFirmName(),
 						productInBasket.getIdProduct().getPrice(), productInBasket.getIdProduct().getAmountAvailable());
-				String image = Base64.getEncoder().encodeToString(
-						productInBasket.getIdProduct().getImage());
+				String image = Base64.getEncoder().encodeToString(productInBasket.getIdProduct().getImage());
 				productFormDTO.setImage(image);
 				ProductInBasketDTO basketDTO = new ProductInBasketDTO(productInBasket.getIdProductInBusket(),
 						productInBasket.getAmount(), productInBasket.getIdBasket(), productFormDTO);
@@ -115,6 +113,17 @@ public class ProductInBasketImpl implements ProductInBasketService {
 		System.out.println("endlist after foreach" + endList);
 
 		return endList;
+	}
+
+	@Transactional
+	public void dellProdInBasket(Integer idProductInBasket) {
+		productInBasketDao.delete(idProductInBasket);;
+
+	}
+
+	@Transactional
+	public ProductInBasket findById(int idProdInBasket) {
+		return productInBasketDao.findOne(idProdInBasket);
 	}
 
 }

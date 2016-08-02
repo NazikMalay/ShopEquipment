@@ -21,7 +21,7 @@ public class ProductType {
 	@Column
 	private String typeName;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idTypeProduct")
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "idTypeProduct")
 	List<ProductType> idTypeProdutcs;
 	
 	public List<ProductType> getIdTypeProdutcs() {

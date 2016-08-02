@@ -49,7 +49,7 @@ public class User {
 	@Column (length = 25,unique = true)
 	private Integer numberPhone;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idUser")
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "idUser")
 	List<Basket> id_User;
 	
 	public User(String name, String surname, String nickName, String email,

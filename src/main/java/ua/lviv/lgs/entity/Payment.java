@@ -25,7 +25,7 @@ public class Payment {
 	@Column
 	private String commentary;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private Basket idBasket;
 
 	public Payment(String commentary, Basket idBasket) {

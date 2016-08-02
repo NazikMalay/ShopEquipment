@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,7 +13,8 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-8">
+			<div>
+				<!--class="col-xs-8"-->
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<div class="panel-title">
@@ -23,7 +26,7 @@
 									</h5>
 								</div>
 								<div class="col-xs-6">
-									<button type="button" class="btn btn-primary btn-sm btn-block">
+									<button type="submit" class="btn btn-primary btn-sm btn-block">
 										<span class="glyphicon glyphicon-share-alt"></span> Continue
 										shopping
 									</button>
@@ -32,39 +35,46 @@
 						</div>
 					</div>
 					<div class="panel-body">
-					<c:forEach var="allProductinBasketOneUserList" items="${allProductinBasketOneUserList}">
-						<div class="row">
-							<div class="col-xs-2" >
-								<img class="userBasketImage" src="data:image/jpeg;base64,${allProductinBasketOneUserList.product.image}"
-								alt="sorry">
-							</div>
-							<div class="col-xs-4">
-								<h4 class="product-name">
-									<strong>${allProductinBasketOneUserList.product.firmName}</strong>
-								</h4>
-								<h4>
-									<small>${allProductinBasketOneUserList.product.model}</small>
-								</h4>
-							</div>
-							<div class="col-xs-6">
-								<div class="col-xs-6 text-right">
-									<h6>
-										<strong>${allProductinBasketOneUserList.product.price} <span class="text-muted">$</span></strong>
-									</h6>
+						<c:forEach var="allProductinBasketOneUserList"
+							items="${allProductinBasketOneUserList}">
+							<div class="row">
+								<div class="col-xs-2">
+									<img class="userBasketImage"
+										src="data:image/jpeg;base64,${allProductinBasketOneUserList.product.image}"
+										alt="sorry">
 								</div>
 								<div class="col-xs-4">
-									<input type="text" class="form-control input-sm" value="1">
+									<h4 class="product-name">
+										<strong>${allProductinBasketOneUserList.product.firmName}</strong>
+									</h4>
+									<h4>
+										<small>${allProductinBasketOneUserList.product.model}</small>
+									</h4>
 								</div>
-								<div class="col-xs-2">
-									<button type="button" class="btn btn-link btn-xs">
-										<span class="glyphicon glyphicon-trash"> </span>
-									</button>
+								<div class="col-xs-6">
+									<div class="col-xs-6 text-right">
+										<h6>
+											<strong>${allProductinBasketOneUserList.product.price}
+												<span class="text-muted">$</span>
+											</strong>
+										</h6>
+									</div>
+									<div class="col-xs-4">
+										<input type="text" class="form-control input-sm" value="1">
+									</div>
+									<div class="col-xs-2">
+										<form:form action="dellProductFromBasket=${allProductinBasketOneUserList.idProductInBusket}" method="GET">
+											<button type="submit"  class="btn btn-link btn-xs">
+												<span class="glyphicon glyphicon-trash">
+												</span>
+											</button>
+										</form:form>
+									</div>
 								</div>
 							</div>
-						</div>
-						<hr>
+							<hr>
 						</c:forEach>
-						
+
 						<div class="row">
 							<div class="text-center">
 								<div class="col-xs-9">

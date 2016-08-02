@@ -10,6 +10,10 @@ public interface ProductInBasketService {
 		 public List<ProductInBasket> getAllProductInBasket();
 		 
 		 public List<ProductInBasketDTO> getAllProductByUserBasket(int idBasket);
+		 
+		 public void dellProdInBasket(Integer idProductInBasket);
+		 
+		 public ProductInBasket findById(int idProdInBasket);
 
 	}
 

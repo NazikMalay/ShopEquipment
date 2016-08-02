@@ -24,7 +24,7 @@ public class Firm {
 	private String firmName;
 
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idFirm")
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "idFirm")
 	List<Firm> idFirms;
 	
 	public Firm(String firmName) {

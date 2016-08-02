@@ -18,10 +18,10 @@ public class Basket {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idBasket;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	private User idUser;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idBasket")
+	@OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "idBasket")
 	List<Basket> listBasket;
 	
 	
