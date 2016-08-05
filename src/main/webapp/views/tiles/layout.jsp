@@ -27,10 +27,10 @@
 </head>
 <body>
 
-	<div>
+	<div id="header">
 		<tiles:insertAttribute name="header"></tiles:insertAttribute>
 	</div>
-	<div>
+	<div id="bodyHome">
 		<tiles:insertAttribute name="body"></tiles:insertAttribute>
 	</div>
 	<div>

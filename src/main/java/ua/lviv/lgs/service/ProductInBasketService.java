@@ -7,8 +7,6 @@ public interface ProductInBasketService {
 		
 		 void addNewProductInBasket(String amount, String product, String idUser);
 		 
-		 public List<ProductInBasket> getAllProductInBasket();
-		 
 		 public List<ProductInBasketDTO> getAllProductByUserBasket(int idBasket);
 		 
 		 public void dellProdInBasket(Integer idProductInBasket);

@@ -22,13 +22,18 @@ public class ProductController {
 	private ProductService productService;
 	
 	
-	
+	//ALL PRODUCTS
 	@RequestMapping(value = "/productPage={pageNumber}", method = RequestMethod.GET)
 	public String showAllProduct(
 			@PathVariable("pageNumber") Integer pageNumber,@RequestParam(value = "searchName", required = false) String searchName ,Model model) {
-	
+	System.out.println("in prod controller");
+	System.out.println("searchName " + searchName);
+	if (searchName ==null) {
+		System.out.println("SEARCHNAME NULL");
+		searchName = "";
+	}
 		 Page<ProductFormDTO> page = productService.getProductPage(pageNumber, searchName);
-	
+	System.out.println("after search");
 		
 		
 		int current = page.getNumber() + 1;
@@ -41,7 +46,7 @@ public class ProductController {
 		model.addAttribute("endIndex", end);
 		model.addAttribute("currentIndex", current);
 		model.addAttribute("searchName", searchName);
-
+System.out.println("after all controller");
 		return "product-product";
 	}
 	

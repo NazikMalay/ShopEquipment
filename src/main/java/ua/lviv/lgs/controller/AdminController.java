@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import ua.lviv.lgs.dto.ProductFormDTO;
 import ua.lviv.lgs.entity.Firm;
 import ua.lviv.lgs.entity.Product;
 import ua.lviv.lgs.entity.ProductType;
@@ -53,7 +54,8 @@ public class AdminController {
 	public String createPageStringAddFirm(Model model,
 			HttpServletRequest request) {
 		if (request.isUserInRole("ROLE_ADMIN")) {
-
+			List <ProductFormDTO> productList = productService.getProductList();
+			model.addAttribute("productList", productList);
 			model.addAttribute("firmObject", new Firm());
 			List<Firm> firmsList = firmService.getAllFirms();
 			model.addAttribute("allFirms", firmsList);
@@ -119,6 +121,12 @@ public class AdminController {
 		return "redirect:adminPage";
 	}
 
-
+	@RequestMapping(value = "changeImage", method = RequestMethod.POST)
+	public String changeImage(@RequestParam("image") MultipartFile file,
+			@RequestParam("productId") String productId){
+		productService.changeImage(productId, file);
+		
+		return "redirect:adminPage";
+	}
 
 }

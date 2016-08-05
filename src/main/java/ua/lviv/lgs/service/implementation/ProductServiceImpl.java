@@ -129,6 +129,7 @@ public class ProductServiceImpl implements ProductService {
 			System.out.println(product.toString());
 
 		}
+		System.out.println("quit with service");
 		return new PageImpl<ProductFormDTO>(listProductDTO, request,
 				page.getTotalElements());
 	}
@@ -167,6 +168,17 @@ public class ProductServiceImpl implements ProductService {
 
 		}
 		return listProductDTO;
+	}
+
+	public void changeImage(String idProduct, MultipartFile file) {
+		Product product = productDao.findOne(Integer.parseInt(idProduct));
+		try {
+			product.setImage(file.getBytes());
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		productDao.saveAndFlush(product);
 	}
 
 	

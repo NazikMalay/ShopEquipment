@@ -35,61 +35,54 @@ public class ProductInBasketImpl implements ProductInBasketService {
 	@Autowired
 	private UserDao userDao;
 
+	
+	
+	//ADD PRODUCT IN BASKET
 	@Transactional
 	public void addNewProductInBasket(String amount, String idProduct, String idUser) {
 
 		User user = userDao.findOne(Integer.parseInt(idUser));
 		System.out.println(user);
+		try {
+			Product product = productDao.findOne(Integer.parseInt(idProduct));
+			System.out.println(product);
 
-		Product product = productDao.findOne(Integer.parseInt(idProduct));
-		System.out.println(product);
+			Basket myBasket = new Basket();
+			System.out.println(myBasket);
+			System.out.println("myBasket 1");
 
-		Basket myBasket = new Basket();
-		System.out.println(myBasket);
-		System.out.println("myBasket 1");
-
-		List<Basket> list = basketDao.findAll();
-		System.out.println("basketList" + list);
-		for (Basket basket : list) {
-			if (basket.getIdUser().equals(user)) {
-				myBasket = basket;
+			List<Basket> list = basketDao.findAll();
+			System.out.println("basketList" + list);
+			for (Basket basket : list) {
+				if (basket.getIdUser().equals(user)) {
+					myBasket = basket;
+				}
 			}
-		}
-		System.out.println("myBasket after foreach");
-		System.out.println(myBasket);
+			System.out.println("myBasket after foreach");
+			System.out.println(myBasket);
 
-		Basket basket = basketDao.findByUser(Integer.parseInt(idUser));
-		System.out.println("===============");
-		System.out.println(basket);
-		if (basket == null) {
-			System.out.println("basket == null , nead create new Basket!");
-			myBasket.setIdUser(user);
-			basketDao.saveAndFlush(myBasket);
-			myBasket = basketDao.findByUser(Integer.parseInt(idUser));
-			System.out.println("=======================================");
-			System.out.println("my basket after findByUserId " + myBasket);
-		}
-		/*
-		 * // if(myBasket.getIdBusket() == null){ //
-		 * System.out.println("basket == null , nead create new Basket!"); //
-		 * myBasket.setIdUser(user); // basketDao.saveAndFlush(myBasket); //
-		 * myBasket = basketDao.findByUser(Integer.parseInt(idUser)); //
-		 * System.out.println("======================================="); //
-		 * System.out.println("my basket after findByUserId " + myBasket); // }
-		 * //
-		 */
-		ProductInBasket productInBasket = new ProductInBasket(Integer.parseInt(amount), product, myBasket);
-		productInBasketDao.saveAndFlush(productInBasket);
-		System.out.println("Saved prod in bask " + productInBasket);
+			Basket basket = basketDao.findByUser(Integer.parseInt(idUser));
+			System.out.println("===============");
+			System.out.println(basket);
+			if (basket == null) {
+				System.out.println("basket == null , nead create new Basket!");
+				myBasket.setIdUser(user);
+				basketDao.saveAndFlush(myBasket);
+				myBasket = basketDao.findByUser(Integer.parseInt(idUser));
+				System.out.println("=======================================");
+				System.out.println("my basket after findByUserId " + myBasket);
+			}
 
+			ProductInBasket productInBasket = new ProductInBasket(Integer.parseInt(amount), product, myBasket);
+			productInBasketDao.saveAndFlush(productInBasket);
+			System.out.println("Saved prod in bask " + productInBasket);
+
+		} catch (NumberFormatException e) {
+			System.out.println("addNewProductInBasket ajax , number is not passed. idProduct ==" + idProduct);
+		}
 	}
 
-	@Transactional
-	public List<ProductInBasket> getAllProductInBasket() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	//GET  PRODUCT IN BASKET FOR USERBASKET.PAGE
 	@Transactional
 	public List<ProductInBasketDTO> getAllProductByUserBasket(int idBasket) {
 		List<ProductInBasketDTO> endList = new ArrayList<ProductInBasketDTO>();
@@ -115,12 +108,15 @@ public class ProductInBasketImpl implements ProductInBasketService {
 		return endList;
 	}
 
+	//DELL PRODUCT IN BASKET
 	@Transactional
 	public void dellProdInBasket(Integer idProductInBasket) {
-		productInBasketDao.delete(idProductInBasket);;
+		productInBasketDao.delete(idProductInBasket);
+		
 
 	}
 
+	//FIND PRODUCT IN BASKET BY ID
 	@Transactional
 	public ProductInBasket findById(int idProdInBasket) {
 		return productInBasketDao.findOne(idProdInBasket);

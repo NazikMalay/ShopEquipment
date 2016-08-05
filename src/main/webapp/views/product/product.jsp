@@ -25,8 +25,8 @@
 		<div class="row">
 			<c:forEach var="productList" items="${productList}">
 				<div class="col-sm-6 col-md-4" id="imgProduct">
-					<a href="#">
-						<div class="thumbnail">
+					<a href="productSingle=${productList.productId}">
+						<div class="thumbnail" id="allProductForm">
 							<img src="data:image/jpeg;base64,${productList.image}"
 								alt="Oyyyps">
 							<div class="caption">

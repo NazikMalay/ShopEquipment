@@ -23,23 +23,27 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="home">Logo</a>
+					<a class="navbar-brand" href="home">Sombra Shop</a>
 				</div>
 				<div class="collapse navbar-collapse" id="responsive-menu">
 					<ul class="nav navbar-nav">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-							type="button">Create User<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="user=1">createNewUser</a></li>
-								<li><a href="#"></a></li>
-								<li class="divider"></li>
-								<li><a href="adminPage">Admin Page </a></li>
-							</ul></li>
-						<li><a href="#">Punkt 2</a></li>
-						<li><a href="user/1">showAllUser</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false" type="button">Create User<b
+									class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="user=1">Users</a></li>
+									<li class="divider"></li>
+									<li><a href="adminPage">Admin Page </a></li>
+								</ul></li>
+						</sec:authorize>
+						<li><a href="productPage=1">Products</a></li>
 
-
+						<sec:authorize access="isAuthenticated()">
+							<li class="btn btn-default btn-lg" id="glyphiconBasket"><a href="userBasket"><span
+								class="glyphicon glyphicon-shopping-cart"></span></a></li>
+						</sec:authorize>
 
 						<form:form action="productPage=1" method="GET"
 							class="navbar-form navbar-left" id="searchBlock" role="search">
@@ -47,7 +51,7 @@
 								<input type="text" class="form-control" placeholder="Search"
 									name="searchName">
 							</div>
-							<button type="submit" class="btn btn-default">Submit</button>
+							<button type="submit" class="btn btn-default">Search</button>
 						</form:form>
 
 

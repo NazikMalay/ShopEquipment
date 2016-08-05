@@ -6,6 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function addProductToCart1(t) {
+		$.ajax({
+			url : 'addProductToCart',
+			type : 'post',
+			data : ({
+				idProduct : t
+			}),
+
+		});
+	}
+</script>
 </head>
 <body class="nav-md">
 	<div class="row">
@@ -32,25 +44,25 @@
 							<img class="col-md-12 col-sm-12 col-xs-12"
 								src="data:image/jpeg;base64,${productObject.image}" alt="..." />
 						</div>
-						<div class="product_gallery">
+						<!-- <div class="product_gallery">
 							<a> <img src="" alt="..." />
 							</a> <a> <img src="" alt="..." />
 							</a> <a> <img src="" alt="..." />
 							</a> <a> <img src="" alt="..." />
 							</a>
-						</div>
+						</div>-->
 					</div>
 
-					<div class="col-md-5 col-sm-5 col-xs-12"
+					<div class="col-md-5 col-sm-5 col-xs-12" 
 						style="border: 0px solid #e5e5e5;">
 
-						<ul class="list-group">
-							<li class="list-group-item">Firm: ${productObject.firm}</li>
-							<li class="list-group-item">Model: ${productObject.model}</li>
-							<li class="list-group-item">Weight: ${productObject.weight}</li>
-							<li class="list-group-item">Size: ${productObject.size}</li>
-							<li class="list-group-item">Type: ${productObject.type}</li>
-							<li class="list-group-item"><span class="badge">${productObject.amountAvailable}</span>In
+						<ul class="list-group" >
+							<li class="list-group-item" id="allProductForm">Firm: ${productObject.firm}</li>
+							<li class="list-group-item" id="allProductForm">Model: ${productObject.model}</li>
+							<li class="list-group-item" id="allProductForm">Weight: ${productObject.weight}</li>
+							<li class="list-group-item" id="allProductForm">Size: ${productObject.size}</li>
+							<li class="list-group-item" id="allProductForm">Type: ${productObject.type}</li>
+							<li class="list-group-item" id="allProductForm"><span class="badge">${productObject.amountAvailable}</span>In
 								stock:</li>
 						</ul>
 
@@ -58,27 +70,32 @@
 
 
 
-						<p>Raw denim you probably haven't heard of them jean shorts
-							Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh
-							dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
+						<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+							aute irure dolor in reprehenderit in voluptate velit esse cillum
+							dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+							cupidatat non proident, sunt in culpa qui officia deserunt mollit
+							anim id est laborum."</p>
 						<br /> <br />
 
 						<div class="">
 							<h2>
 								Size <small>Please select one</small>
 							</h2>
-							<ul class="list-inline prod_size">
+							<ul class="list-inline prod_size" >
 								<li>
-									<button type="button" class="btn btn-default btn-xs">Small</button>
+									<button type="button" class="btn btn-default btn-xs" id="allProductForm">Small</button>
 								</li>
 								<li>
-									<button type="button" class="btn btn-default btn-xs">Medium</button>
+									<button type="button" class="btn btn-default btn-xs" id="allProductForm">Medium</button>
 								</li>
 								<li>
-									<button type="button" class="btn btn-default btn-xs">Large</button>
+									<button type="button" class="btn btn-default btn-xs" id="allProductForm">Large</button>
 								</li>
 								<li>
-									<button type="button" class="btn btn-default btn-xs">Xtra-Large</button>
+									<button type="button" class="btn btn-default btn-xs" id="allProductForm">Xtra-Large</button>
 								</li>
 							</ul>
 						</div>
@@ -86,16 +103,14 @@
 
 						<div class="">
 							<div class="product_price">
-								<h1 class="price">Ksh80.00</h1>
-								<span class="price-tax">Ex Tax: Ksh80.00</span> <br>
+								<h1 class="price">${productObject.price}$</h1>
 							</div>
 						</div>
 
 						<div class="">
-							<button type="button" class="btn btn-default btn-lg">Add
-								to Cart</button>
-							<button type="button" class="btn btn-default btn-lg">Add
-								to Wishlist</button>
+							<button id="allProductForm" onclick="addProductToCart1(this.value)"
+								class="btn btn-default btn-lg" role="button" 
+								value="${productObject.productId}">Add to Cart</button>
 						</div>
 
 						<div class="product_social">
@@ -127,27 +142,36 @@
 							<div id="myTabContent" class="tab-content">
 								<div role="tabpanel" class="tab-pane fade active in"
 									id="tab_content1" aria-labelledby="home-tab">
-									<p>Raw denim you probably haven't heard of them jean shorts
-										Austin. Nesciunt tofu stumptown aliqua, retro synth master
-										cleanse. Mustache cliche tempor, williamsburg carles vegan
-										helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-										synth. Cosby sweater eu banh mi, qui irure terr.</p>
+									<p>"Lorem ipsum dolor sit amet, consectetur adipiscing
+										elit, sed do eiusmod tempor incididunt ut labore et dolore
+										magna aliqua. Ut enim ad minim veniam, quis nostrud
+										exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate
+										velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+										sint occaecat cupidatat non proident, sunt in culpa qui
+										officia deserunt mollit anim id est laborum."</p>
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="tab_content2"
 									aria-labelledby="profile-tab">
-									<p>Food truck fixie locavore, accusamus mcsweeney's marfa
-										nulla single-origin coffee squid. Exercitation +1 labore
-										velit, blog sartorial PBR leggings next level wes anderson
-										artisan four loko farm-to-table craft beer twee. Qui photo
-										booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+									<p>"Lorem ipsum dolor sit amet, consectetur adipiscing
+										elit, sed do eiusmod tempor incididunt ut labore et dolore
+										magna aliqua. Ut enim ad minim veniam, quis nostrud
+										exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate
+										velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+										sint occaecat cupidatat non proident, sunt in culpa qui
+										officia deserunt mollit anim id est laborum."</p>
 								</div>
 								<div role="tabpanel" class="tab-pane fade" id="tab_content3"
 									aria-labelledby="profile-tab">
-									<p>xxFood truck fixie locavore, accusamus mcsweeney's marfa
-										nulla single-origin coffee squid. Exercitation +1 labore
-										velit, blog sartorial PBR leggings next level wes anderson
-										artisan four loko farm-to-table craft beer twee. Qui photo
-										booth letterpress, commodo enim craft beer mlkshk</p>
+									<p>"Lorem ipsum dolor sit amet, consectetur adipiscing
+										elit, sed do eiusmod tempor incididunt ut labore et dolore
+										magna aliqua. Ut enim ad minim veniam, quis nostrud
+										exercitation ullamco laboris nisi ut aliquip ex ea commodo
+										consequat. Duis aute irure dolor in reprehenderit in voluptate
+										velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+										sint occaecat cupidatat non proident, sunt in culpa qui
+										officia deserunt mollit anim id est laborum."</p>
 								</div>
 							</div>
 						</div>
