@@ -33,35 +33,27 @@ public class AdminController {
 	@Autowired
 	private ProductService productService;
 
-	
-	@RequestMapping(value="adddProduct")
-	public String createPage(Model model){
+	@RequestMapping(value = "adddProduct")
+	public String createPage(Model model) {
 		List<Firm> firmsList = firmService.getAllFirms();
 		model.addAttribute("allFirms", firmsList);
-		List<ProductType> productTypeList = productTypeService
-				.getAllProductType();
+		List<ProductType> productTypeList = productTypeService.getAllProductType();
 		model.addAttribute("allProductType", productTypeList);
-		
+
 		return "product-addProduct";
 	}
-	
-	
-	
-	
-	
+
 	// Create page ADMIN
 	@RequestMapping(value = "adminPage")
-	public String createPageStringAddFirm(Model model,
-			HttpServletRequest request) {
+	public String createPageStringAddFirm(Model model, HttpServletRequest request) {
 		if (request.isUserInRole("ROLE_ADMIN")) {
-			List <ProductFormDTO> productList = productService.getProductList();
+			List<ProductFormDTO> productList = productService.getProductList();
 			model.addAttribute("productList", productList);
 			model.addAttribute("firmObject", new Firm());
 			List<Firm> firmsList = firmService.getAllFirms();
 			model.addAttribute("allFirms", firmsList);
 			model.addAttribute("productObject", new Product());
-			List<ProductType> productTypeList = productTypeService
-					.getAllProductType();
+			List<ProductType> productTypeList = productTypeService.getAllProductType();
 			model.addAttribute("allProductType", productTypeList);
 			model.addAttribute("productTypeObject", new ProductType());
 
@@ -92,8 +84,7 @@ public class AdminController {
 
 	// add product type
 	@RequestMapping(value = "addNewProductType", method = RequestMethod.POST)
-	public String addProductType(
-			@ModelAttribute(value = "productTypeObject") ProductType productType) {
+	public String addProductType(@ModelAttribute(value = "productTypeObject") ProductType productType) {
 		productTypeService.addProductType(productType.getTypeName());
 		return "redirect:adminPage";
 	}
@@ -107,26 +98,30 @@ public class AdminController {
 
 	// PRODUCT
 	@RequestMapping(value = "/createProduct", method = RequestMethod.POST)
-	public String createProduct(@RequestParam("model") String model,
-			@RequestParam("productType") String idTypeProduct,
-			@RequestParam("weight") String weight,
-			@RequestParam("size") String size,
-			@RequestParam("amounAvailable") String amounAvailable,
-			@RequestParam("prise") String price,
-			@RequestParam("firm") String firm,
-			@RequestParam("image") MultipartFile file) {
+	public String createProduct(@RequestParam("model") String model, @RequestParam("productType") String idTypeProduct,
+			@RequestParam("weight") String weight, @RequestParam("size") String size,
+			@RequestParam("amounAvailable") String amounAvailable, @RequestParam("prise") String price,
+			@RequestParam("firm") String firm, @RequestParam("image") MultipartFile file) {
 
-		productService.addProduct(model, weight, size, amounAvailable, price,
-				firm, idTypeProduct, file);
+		productService.addProduct(model, weight, size, amounAvailable, price, firm, idTypeProduct, file);
 		return "redirect:adminPage";
 	}
 
 	@RequestMapping(value = "changeImage", method = RequestMethod.POST)
-	public String changeImage(@RequestParam("image") MultipartFile file,
-			@RequestParam("productId") String productId){
+	public String changeImage(@RequestParam("image") MultipartFile file, @RequestParam("productId") String productId) {
 		productService.changeImage(productId, file);
-		
+
 		return "redirect:adminPage";
 	}
 
+	@RequestMapping(value = "deleteProduct", method = RequestMethod.POST)
+	public String delProduct(@RequestParam("productId") String[] productId) {
+
+		for (String string : productId) {
+			productService.dellProductOnId(string.toString());
+		}
+		
+		
+		return "redirect:adminPage";
+	}
 }

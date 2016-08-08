@@ -30,7 +30,7 @@
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false" type="button">Create User<b
+								aria-expanded="false" type="button">AdminPanel<b
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="user=1">Users</a></li>

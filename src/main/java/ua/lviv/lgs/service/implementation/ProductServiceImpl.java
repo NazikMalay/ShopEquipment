@@ -142,8 +142,8 @@ public class ProductServiceImpl implements ProductService {
 				product.getProductId(), product.getModel(),
 				product.getWeight(), product.getSize(),
 				product.getAmountAvailable(), product.getPrice(), firmDao
-						.findOne(product.getProductId()).getFirmName(),
-				productTypeDao.findOne(product.getProductId()).getTypeName());
+						.findOne(product.getFirm().getIdFirm()).getFirmName(),
+				productTypeDao.findOne(product.getIdTypeProduct().getIdTypeProduct()).getTypeName());
 
 		String image = Base64.getEncoder().encodeToString(product.getImage());
 		productDTO.setImage(image);
@@ -179,6 +179,11 @@ public class ProductServiceImpl implements ProductService {
 			e.printStackTrace();
 		}
 		productDao.saveAndFlush(product);
+	}
+	@Transactional
+	public void dellProductOnId(String idProduct) {
+		productDao.delete(productDao.findOne(Integer.parseInt(idProduct)));
+		
 	}
 
 	

@@ -25,11 +25,11 @@
 		<div class="row">
 			<c:forEach var="productList" items="${productList}">
 				<div class="col-sm-6 col-md-4" id="imgProduct">
-					<a href="productSingle=${productList.productId}">
 						<div class="thumbnail" id="allProductForm">
-							<img src="data:image/jpeg;base64,${productList.image}"
-								alt="Oyyyps">
-							<div class="caption">
+						<a href="productSingle=${productList.productId}"> <img
+							src="data:image/jpeg;base64,${productList.image}" alt="Oyyyps">
+						</a>
+						<div class="caption">
 								<h3>${productList.firmName}</h3>
 								<p>${productList.model}</p>
 								<p>Price ${productList.price} $</p>
@@ -42,7 +42,6 @@
 								</p>
 							</div>
 						</div>
-					</a>
 				</div>
 
 			</c:forEach>

@@ -28,4 +28,6 @@ public interface ProductService {
 	public SingleProductDTO getSingleProduct(Integer productId);
 	
 	public void changeImage(String idProduct, MultipartFile file);
+	
+	public void dellProductOnId(String idProduct);
 }

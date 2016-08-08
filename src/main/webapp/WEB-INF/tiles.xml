@@ -18,12 +18,12 @@
 	
 	<definition name="user-*" extends="base.definition">
 		<put-attribute name="body" value="/views/user/{1}.jsp"></put-attribute>
-		<put-attribute name="title" value="User {1}"></put-attribute>
+		<put-attribute name="title" value="User"></put-attribute>
 	</definition>
 	
 	<definition name="product-*" extends="base.definition">
 		<put-attribute name="body" value="/views/product/{1}.jsp"></put-attribute>
-		<put-attribute name="title" value="Product {1}"></put-attribute>
+		<put-attribute name="title" value="Product"></put-attribute>
 	</definition>
 	
 	<definition name="loginpage" extends="base.definition">

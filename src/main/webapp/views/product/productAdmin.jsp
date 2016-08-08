@@ -97,9 +97,6 @@
 						<div class="panel panel-default">
 							<!-- Default panel contents -->
 							<div class="panel-heading">Products</div>
-							<div class="panel-body">
-								<p>...</p>
-							</div>
 
 							<!-- Table -->
 							<table class="table">
@@ -144,8 +141,8 @@
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseThree"
-						aria-expanded="false" aria-controls="collapseThree"> Add
-						Product </a>
+						aria-expanded="false" aria-controls="collapseThree"> Add/Dell
+						Products </a>
 				</h4>
 			</div>
 			<div id="collapseThree" class="panel-collapse collapse"
@@ -189,6 +186,41 @@
 
 					</form>
 
+				</div>
+				<div class="container">
+					<form action="deleteProduct" method="post"
+						enctype="multipart/form-data">
+
+						<div class="panel panel-default">
+							<!-- Default panel contents -->
+							<div class="panel-heading">Products</div>
+
+							<!-- Table -->
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Firm</th>
+										<th>Model</th>
+										<th>Type price</th>
+										<th>id</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="productList" items="${productList}">
+										<tr>
+											<td>${productList.firmName}</td>
+											<td>${productList.model}</td>
+											<td>${productList.price}</td>
+											<td><input type="checkbox" name="productId"
+												value="${productList.productId}">${productList.productId}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							
+							<button class="btn btn-success" type="submit">Delete Product</button>
+					</form>
+					
 				</div>
 
 			</div>

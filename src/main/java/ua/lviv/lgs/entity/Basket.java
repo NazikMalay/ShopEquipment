@@ -48,7 +48,7 @@ public class Basket {
 
 	@Override
 	public String toString() {
-		return "Basket [idBusket=" + idBasket + ", idUser=" + idUser + "]";
+		return "Basket [idBusket=" + idBasket + "]";
 	}
 	
 	
