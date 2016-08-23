@@ -4,7 +4,6 @@
 	<persistence-unit name="Primary" transaction-type="RESOURCE_LOCAL">
 		<class>ua.lviv.lgs.entity.Basket</class>
 		<class>ua.lviv.lgs.entity.Firm</class>
-		<class>ua.lviv.lgs.entity.Payment</class>
 		<class>ua.lviv.lgs.entity.Product</class>
 		<class>ua.lviv.lgs.entity.ProductInBasket</class>
 		<class>ua.lviv.lgs.entity.ProductType</class>
