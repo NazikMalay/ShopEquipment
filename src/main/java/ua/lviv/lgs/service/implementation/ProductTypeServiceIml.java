@@ -33,7 +33,6 @@ public class ProductTypeServiceIml implements ProductTypeService {
 
 	@Transactional
 	public ProductType getProductType(String typeName) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

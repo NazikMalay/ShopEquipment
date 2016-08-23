@@ -1,24 +1,20 @@
 package ua.lviv.lgs.dto;
 
-
-
-
 public class ProductFormDTO {
-	
+
 	private int productId;
 
 	private String model;
-	
+
 	private String firmName;
-	
+
 	private String image;
-	
+
 	private int price;
-	
+
 	private int amountAvailable;
 
-	public ProductFormDTO(int productId, String model, String firmName,
-			int price, int amountAvailable) {
+	public ProductFormDTO(int productId, String model, String firmName, int price, int amountAvailable) {
 		super();
 		this.productId = productId;
 		this.model = model;
@@ -77,14 +73,8 @@ public class ProductFormDTO {
 
 	@Override
 	public String toString() {
-		return "ProductFormDTO [productId=" + productId + ", model=" + model
-				+ ", firmName=" + firmName + ", image=" + image + ", price="
-				+ price + ", amountAvailable=" + amountAvailable + "]";
+		return "ProductFormDTO [productId=" + productId + ", model=" + model + ", firmName=" + firmName + ", image="
+				+ image + ", price=" + price + ", amountAvailable=" + amountAvailable + "]";
 	}
 
-
-	
-	
-	
-	
 }

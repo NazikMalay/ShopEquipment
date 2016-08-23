@@ -35,9 +35,6 @@ public class ProductInBasketImpl implements ProductInBasketService {
 	@Autowired
 	private UserDao userDao;
 
-	
-	
-	//ADD PRODUCT IN BASKET
 	@Transactional
 	public void addNewProductInBasket(String amount, String idProduct, String idUser) {
 
@@ -62,15 +59,11 @@ public class ProductInBasketImpl implements ProductInBasketService {
 			System.out.println(myBasket);
 
 			Basket basket = basketDao.findByUser(Integer.parseInt(idUser));
-			System.out.println("===============");
 			System.out.println(basket);
 			if (basket == null) {
-				System.out.println("basket == null , nead create new Basket!");
 				myBasket.setIdUser(user);
 				basketDao.saveAndFlush(myBasket);
 				myBasket = basketDao.findByUser(Integer.parseInt(idUser));
-				System.out.println("=======================================");
-				System.out.println("my basket after findByUserId " + myBasket);
 			}
 
 			ProductInBasket productInBasket = new ProductInBasket(Integer.parseInt(amount), product, myBasket);
@@ -82,7 +75,6 @@ public class ProductInBasketImpl implements ProductInBasketService {
 		}
 	}
 
-	//GET  PRODUCT IN BASKET FOR USERBASKET.PAGE
 	@Transactional
 	public List<ProductInBasketDTO> getAllProductByUserBasket(int idBasket) {
 		List<ProductInBasketDTO> endList = new ArrayList<ProductInBasketDTO>();
@@ -108,15 +100,12 @@ public class ProductInBasketImpl implements ProductInBasketService {
 		return endList;
 	}
 
-	//DELL PRODUCT IN BASKET
 	@Transactional
 	public void dellProdInBasket(Integer idProductInBasket) {
 		productInBasketDao.delete(idProductInBasket);
-		
 
 	}
 
-	//FIND PRODUCT IN BASKET BY ID
 	@Transactional
 	public ProductInBasket findById(int idProdInBasket) {
 		return productInBasketDao.findOne(idProdInBasket);

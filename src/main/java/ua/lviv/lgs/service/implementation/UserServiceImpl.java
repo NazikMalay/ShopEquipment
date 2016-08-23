@@ -1,6 +1,5 @@
 package ua.lviv.lgs.service.implementation;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,16 +18,14 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	private static final int PAGE_SIZE = 5;
-	
+
 	@Transactional
-	public void addUser(String name, String surname, String nickName,
-			String email, String password, int numberPhone) {
-		User user = new User(name, surname, nickName, email,
-				numberPhone);
+	public void addUser(String name, String surname, String nickName, String email, String password, int numberPhone) {
+		User user = new User(name, surname, nickName, email, numberPhone);
 		BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
-		
+
 		user.setPassword(pass.encode(password));
 		userDao.saveAndFlush(user);
 
@@ -38,35 +35,23 @@ public class UserServiceImpl implements UserService {
 	public User findUser(String name, String surname) {
 		User user = new User();
 		for (User user1 : userDao.findAll()) {
-			if (user1.getName().equalsIgnoreCase(name)
-					&& user1.getSurname().equalsIgnoreCase(surname)) {
+			if (user1.getName().equalsIgnoreCase(name) && user1.getSurname().equalsIgnoreCase(surname)) {
 				user = user1;
 			}
 		}
 		return user;
 	}
 
-//	@Transactional
-//	public List<User> getAllUser() {
-//		return userDao.findAll();
-//	}
-	
-	//PAGINATION
 	@Transactional
-	public Page<User> getAllUsers(Integer pageNumber){
+	public Page<User> getAllUsers(Integer pageNumber) {
 		Pageable request = new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.DESC, "name");
 		return userDao.findAll(request);
 	}
-	
-	
-	
-	
 
 	@Transactional
 	public void dellUser(String userName, String surname) {
 		for (User user1 : userDao.findAll()) {
-			if (user1.getName().equalsIgnoreCase(userName)
-					&& user1.getSurname().equalsIgnoreCase(surname)) {
+			if (user1.getName().equalsIgnoreCase(userName) && user1.getSurname().equalsIgnoreCase(surname)) {
 				userDao.delete(user1);
 			}
 
@@ -79,12 +64,11 @@ public class UserServiceImpl implements UserService {
 		User user = userDao.getOne(id);
 		return user;
 	}
-	
+
 	@Transactional
-	public User findByLogin(String nickName){ 
+	public User findByLogin(String nickName) {
 		User user = userDao.findByLogin(nickName);
 		return user;
 	}
-	
-	
+
 }

@@ -10,22 +10,21 @@ import ua.lviv.lgs.entity.Basket;
 import ua.lviv.lgs.entity.User;
 import ua.lviv.lgs.service.BasketService;
 
-
 @Service
-public class BasketServiceImpl implements BasketService{
+public class BasketServiceImpl implements BasketService {
 
 	@Autowired
 	private BasketDao basketDao;
 
 	public void addBasket(User user) {
-	Basket basket = new Basket(user);
-	basketDao.saveAndFlush(basket);
+		Basket basket = new Basket(user);
+		basketDao.saveAndFlush(basket);
 	}
 
 	public void dellBasket(User user) {
 		Basket basket = basketDao.findByUser(user.getIdUser());
 		basketDao.delete(basket);
-		
+
 	}
 
 	public List<Basket> getAllBasket() {
@@ -36,8 +35,4 @@ public class BasketServiceImpl implements BasketService{
 		return basketDao.findByUser(userId);
 	}
 
-
-	
-	
-	
 }

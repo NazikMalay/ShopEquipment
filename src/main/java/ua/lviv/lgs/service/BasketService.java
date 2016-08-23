@@ -8,12 +8,11 @@ import ua.lviv.lgs.entity.User;
 public interface BasketService {
 
 	void addBasket(User user);
-	
+
 	void dellBasket(User user);
-	
+
 	List<Basket> getAllBasket();
-	
+
 	Basket getBasketByUserId(int userId);
-	
-	
+
 }

@@ -32,20 +32,16 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private FirmDao firmDao;
-	
+
 	@Autowired
 	private ProductTypeDao productTypeDao;
 
-	// add product
 	@Transactional
-	public void addProduct(String model, String weight, String size,
-			String amounAvailable, String prise, String idFirm,
+	public void addProduct(String model, String weight, String size, String amounAvailable, String prise, String idFirm,
 			String idProductType, MultipartFile file) {
-		Product product = new Product(model, weight, size,
-				Integer.parseInt(amounAvailable), Integer.parseInt(prise));
+		Product product = new Product(model, weight, size, Integer.parseInt(amounAvailable), Integer.parseInt(prise));
 		product.setFirm(firmDao.findOne(Integer.parseInt(idFirm)));
-		product.setIdTypeProduct(productTypeDao.findOne(Integer
-				.parseInt(idProductType)));
+		product.setIdTypeProduct(productTypeDao.findOne(Integer.parseInt(idProductType)));
 		try {
 			product.setImage(file.getBytes());
 		} catch (IOException e) {
@@ -55,13 +51,11 @@ public class ProductServiceImpl implements ProductService {
 		productDao.save(product);
 	}
 
-	// dell product
 	@Transactional
 	public void dellProduct(String model, String firmName) {
 		for (Product product : productDao.findAll()) {
 			if (product.getModel().equalsIgnoreCase(model)
-					&& product.getFirm().getFirmName()
-							.equalsIgnoreCase(firmName)) {
+					&& product.getFirm().getFirmName().equalsIgnoreCase(firmName)) {
 				productDao.delete(product);
 			}
 		}
@@ -73,76 +67,53 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findAll();
 	}
 
-	// add all product to page ProductFormDTO and get search productDTO
-
 	@Transactional
 	public Page<ProductFormDTO> getProductPage(Integer pageNumber) {
 		List<ProductFormDTO> listProductDTO = new ArrayList<ProductFormDTO>();
-		
-		
-		
+
 		Pageable request = new PageRequest(pageNumber - 1, PAGE_SIZE);
 
 		Page<Product> page = productDao.findAll(request);
-		System.out.println(page.getSize()  + " --SIZE");
+		System.out.println(page.getSize() + " --SIZE");
 		for (Product product : page.getContent()) {
-			ProductFormDTO productDTO = new ProductFormDTO(
-					product.getProductId(), product.getModel(), product
-							.getFirm().getFirmName(), product.getPrice(),
-					product.getAmountAvailable());
-			String image = Base64.getEncoder().encodeToString(
-					product.getImage());
+			ProductFormDTO productDTO = new ProductFormDTO(product.getProductId(), product.getModel(),
+					product.getFirm().getFirmName(), product.getPrice(), product.getAmountAvailable());
+			String image = Base64.getEncoder().encodeToString(product.getImage());
 			productDTO.setImage(image);
 			listProductDTO.add(productDTO);
-			
+
 			System.out.println(product.toString());
 
 		}
-		return new PageImpl<ProductFormDTO>(listProductDTO, request,
-				page.getTotalElements());
+		return new PageImpl<ProductFormDTO>(listProductDTO, request, page.getTotalElements());
 	}
 
 	@Transactional
-	public Page<ProductFormDTO> getProductPage(Integer pageNumber,
-			String searchName) {
+	public Page<ProductFormDTO> getProductPage(Integer pageNumber, String searchName) {
 		List<ProductFormDTO> listProductDTO = new ArrayList<ProductFormDTO>();
-		
-		
 
 		Pageable request = new PageRequest(pageNumber - 1, PAGE_SIZE);
-		
-		
 
 		Page<Product> page = productDao.getSearchList(searchName, request);
-		
-		System.out.println(page.getSize() + " --SIZE");
+
 		for (Product product : page.getContent()) {
-			ProductFormDTO productDTO = new ProductFormDTO(
-					product.getProductId(), product.getModel(), product
-							.getFirm().getFirmName(), product.getPrice(),
-					product.getAmountAvailable());
-			String image = Base64.getEncoder().encodeToString(
-					product.getImage());
+			ProductFormDTO productDTO = new ProductFormDTO(product.getProductId(), product.getModel(),
+					product.getFirm().getFirmName(), product.getPrice(), product.getAmountAvailable());
+			String image = Base64.getEncoder().encodeToString(product.getImage());
 			productDTO.setImage(image);
 			listProductDTO.add(productDTO);
-			
-			System.out.println(product.toString());
 
 		}
 		System.out.println("quit with service");
-		return new PageImpl<ProductFormDTO>(listProductDTO, request,
-				page.getTotalElements());
+		return new PageImpl<ProductFormDTO>(listProductDTO, request, page.getTotalElements());
 	}
 
-	// get single productDTO
 	@Transactional
 	public SingleProductDTO getSingleProduct(Integer productId) {
 		Product product = productDao.findOne(productId);
-		SingleProductDTO productDTO = new SingleProductDTO(
-				product.getProductId(), product.getModel(),
-				product.getWeight(), product.getSize(),
-				product.getAmountAvailable(), product.getPrice(), firmDao
-						.findOne(product.getFirm().getIdFirm()).getFirmName(),
+		SingleProductDTO productDTO = new SingleProductDTO(product.getProductId(), product.getModel(),
+				product.getWeight(), product.getSize(), product.getAmountAvailable(), product.getPrice(),
+				firmDao.findOne(product.getFirm().getIdFirm()).getFirmName(),
 				productTypeDao.findOne(product.getIdTypeProduct().getIdTypeProduct()).getTypeName());
 
 		String image = Base64.getEncoder().encodeToString(product.getImage());
@@ -156,14 +127,8 @@ public class ProductServiceImpl implements ProductService {
 
 		List<Product> page = productDao.findAll();
 		for (Product product : page) {
-			ProductFormDTO productDTO = new ProductFormDTO(
-					product.getProductId(), product.getModel(), product
-							.getFirm().getFirmName(), product.getPrice(),
-					product.getAmountAvailable());
-			/*
-			 * String image = Base64.getEncoder().encodeToString(
-			 * product.getImage()); productDTO.setImage(image);
-			 */
+			ProductFormDTO productDTO = new ProductFormDTO(product.getProductId(), product.getModel(),
+					product.getFirm().getFirmName(), product.getPrice(), product.getAmountAvailable());
 			listProductDTO.add(productDTO);
 
 		}
@@ -175,47 +140,16 @@ public class ProductServiceImpl implements ProductService {
 		try {
 			product.setImage(file.getBytes());
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 		productDao.saveAndFlush(product);
 	}
+
 	@Transactional
 	public void dellProductOnId(String idProduct) {
 		productDao.delete(productDao.findOne(Integer.parseInt(idProduct)));
-		
+
 	}
 
-	
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-// add all product to page ProductFormDTO
-/*
- * @Transactional public Page<ProductFormDTO> getProductPage(Integer pageNumber,
- * String searchName) { List<ProductFormDTO> listProductDTO = new
- * ArrayList<ProductFormDTO>();
- * 
- * Pageable request = new PageRequest(pageNumber - 1, PAGE_SIZE);
- * 
- * Page<Product> page = productDao.findAll(request); for (Product product :
- * page.getContent()) { ProductFormDTO productDTO = new ProductFormDTO(
- * product.getProductId(), product.getModel(), product .getFirm().getFirmName(),
- * product.getPrice(), product.getAmountAvailable()); String image =
- * Base64.getEncoder().encodeToString( product.getImage());
- * productDTO.setImage(image); listProductDTO.add(productDTO);
- * 
- * } return new PageImpl<ProductFormDTO>(listProductDTO, request,
- * page.getTotalElements()); }
- */

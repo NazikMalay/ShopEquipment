@@ -20,57 +20,45 @@ import ua.lviv.lgs.service.UserService;
 
 @Controller
 public class BasketController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ProductInBasketService productInBasketService;
-	
+
 	@Autowired
 	private BasketService basketService;
 
 	@RequestMapping(value = "/addProductToCart", method = RequestMethod.POST)
-	public String addProductToBusket(
-			@RequestParam("idProduct") String idProduct) {
+	public String addProductToBusket(@RequestParam("idProduct") String idProduct) {
 		try {
-			System.out.println("addProductToBusket");
-			Authentication auth = SecurityContextHolder.getContext()
-					.getAuthentication();
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByLogin(auth.getName());
-			System.out.println(user.getIdUser().toString());
-			productInBasketService.addNewProductInBasket("1" , idProduct, user.getIdUser().toString());
-			
+			productInBasketService.addNewProductInBasket("1", idProduct, user.getIdUser().toString());
+
 		} catch (NullPointerException e) {
 			System.out.println("NULLPOIN /addProductToCart");
 		}
-		
-		
+
 		return "redirect:product-product";
 
 	}
-	
-	@RequestMapping(value= "/userBasket", method = RequestMethod.GET)
-	public String getUserBasket(Model model){
+
+	@RequestMapping(value = "/userBasket", method = RequestMethod.GET)
+	public String getUserBasket(Model model) {
 		try {
-			
-			Authentication auth = SecurityContextHolder.getContext()
-					.getAuthentication();
+
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByLogin(auth.getName());
-			System.out.println(user.getIdUser().toString());
 			Basket basket = basketService.getBasketByUserId(user.getIdUser());
-			List<ProductInBasketDTO> list = productInBasketService.getAllProductByUserBasket(basket.getIdBusket());				
-			model.addAttribute("allProductinBasketOneUserList", list);	
+			List<ProductInBasketDTO> list = productInBasketService.getAllProductByUserBasket(basket.getIdBusket());
+			model.addAttribute("allProductinBasketOneUserList", list);
 		} catch (NullPointerException e) {
 			System.out.println("NULLPOIN /userBasket");
 		}
-		
-		
-		
-		
+
 		return "basket-userBasket";
 	}
-
-	
 
 }

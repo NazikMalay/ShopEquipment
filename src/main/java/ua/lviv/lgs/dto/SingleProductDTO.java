@@ -20,9 +20,8 @@ public class SingleProductDTO {
 
 	private String type;
 
-	public SingleProductDTO(Integer productId, String model, String weight,
-			String size, Integer amountAvailable, Integer price, String firm,
-			String type) {
+	public SingleProductDTO(Integer productId, String model, String weight, String size, Integer amountAvailable,
+			Integer price, String firm, String type) {
 		super();
 		this.productId = productId;
 		this.model = model;

@@ -19,8 +19,7 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/user={pageNumber}", method = RequestMethod.GET)
-	public String getUserPage(@PathVariable("pageNumber") Integer pageNumber,
-			Model model) {
+	public String getUserPage(@PathVariable("pageNumber") Integer pageNumber, Model model) {
 		Page<User> page = userService.getAllUsers(pageNumber);
 
 		int current = page.getNumber() + 1;
@@ -36,35 +35,18 @@ public class UserController {
 		return "user-getAllUser";
 	}
 
-//	@RequestMapping(value = "/createNewUser")
-//	public String createUserPage(Model model) {
-//		model.addAttribute("userObject", new User());
-//		return "user-addNewUser";
-//	}
-//
-//	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
-//	public String createUser(@ModelAttribute(value = "userObject") User user) {
-//		userService.addUser(user.getName(), user.getSurname(),
-//				user.getNickName(), user.getEmail(), user.getPassword(),
-//				user.getNumberPhone());
-//		return "redirect:/user=1";
-//	}
-
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public String createUser1(@RequestParam("name") String name,
-			@RequestParam("surname") String surname,
-			@RequestParam("nickName") String nickName,
-			@RequestParam("email") String email,
-			@RequestParam("password") String password,
-			@RequestParam("numberPhone") String numberPhone){
+	public String createUser1(@RequestParam("name") String name, @RequestParam("surname") String surname,
+			@RequestParam("nickName") String nickName, @RequestParam("email") String email,
+			@RequestParam("password") String password, @RequestParam("numberPhone") String numberPhone) {
 		try {
 			System.out.println("Start add user");
 			userService.addUser(name, surname, nickName, email, password, Integer.parseInt(numberPhone));
 			System.out.println("user added");
-			
-		} catch (NumberFormatException    e) {
+
+		} catch (NumberFormatException e) {
 			System.out.println(" NumberFormatException in createUser1");
-		}catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			System.out.println("NullPoint!!");
 		}
 		return "loginpage";
@@ -72,7 +54,7 @@ public class UserController {
 
 	@RequestMapping(value = "/addNewUserPage")
 	public String createUserPage1() {
-		
+
 		return "user-registUser";
 	}
 }

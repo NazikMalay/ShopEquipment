@@ -1,11 +1,11 @@
 package ua.lviv.lgs.dto;
 
 public class SinglUserDetailDTO {
-	
+
 	private String nickName;
 
 	private int id;
-	
+
 	public SinglUserDetailDTO() {
 		super();
 	}
@@ -16,8 +16,6 @@ public class SinglUserDetailDTO {
 		this.nickName = nickName;
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -33,7 +31,5 @@ public class SinglUserDetailDTO {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	
-	
 
 }

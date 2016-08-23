@@ -43,7 +43,6 @@ public class AdminController {
 		return "product-addProduct";
 	}
 
-	// Create page ADMIN
 	@RequestMapping(value = "adminPage")
 	public String createPageStringAddFirm(Model model, HttpServletRequest request) {
 		if (request.isUserInRole("ROLE_ADMIN")) {
@@ -63,40 +62,30 @@ public class AdminController {
 		}
 	}
 
-	// FIRM
-
-	// add new firm
 	@RequestMapping(value = "addNewFirm", method = RequestMethod.POST)
 	public String createNewFirm(@ModelAttribute(value = "firmObject") Firm firm) {
-		// firmService.dellFirm(firm.getFirmName());
 		firmService.addFirm(firm.getFirmName());
 		return "redirect:adminPage";
 	}
 
-	// dell firm for ID
 	@RequestMapping(value = "dellFirm", method = RequestMethod.POST)
 	public String dellFirm(@RequestParam("firm") String firmId) {
 		firmService.dellFirmId(Integer.parseInt(firmId));
 		return "redirect:adminPage";
 	}
 
-	// PRODUCTTYPE
-
-	// add product type
 	@RequestMapping(value = "addNewProductType", method = RequestMethod.POST)
 	public String addProductType(@ModelAttribute(value = "productTypeObject") ProductType productType) {
 		productTypeService.addProductType(productType.getTypeName());
 		return "redirect:adminPage";
 	}
 
-	// dell product type
 	@RequestMapping(value = "dellProductType", method = RequestMethod.POST)
 	public String dellProductType(@RequestParam("productType") String typeId) {
 		productTypeService.dellProductTypeId(Integer.parseInt(typeId));
 		return "redirect:adminPage";
 	}
 
-	// PRODUCT
 	@RequestMapping(value = "/createProduct", method = RequestMethod.POST)
 	public String createProduct(@RequestParam("model") String model, @RequestParam("productType") String idTypeProduct,
 			@RequestParam("weight") String weight, @RequestParam("size") String size,
@@ -120,8 +109,7 @@ public class AdminController {
 		for (String string : productId) {
 			productService.dellProductOnId(string.toString());
 		}
-		
-		
+
 		return "redirect:adminPage";
 	}
 }

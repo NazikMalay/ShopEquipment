@@ -5,7 +5,7 @@ public class SearchProductNameListDTO {
 	private Integer productId;
 
 	private String model;
-	
+
 	private String firm;
 
 	public SearchProductNameListDTO(Integer productId, String model, String firm) {
@@ -45,10 +45,7 @@ public class SearchProductNameListDTO {
 
 	@Override
 	public String toString() {
-		return "SearchProductNameListDTO [productId=" + productId + ", model="
-				+ model + ", firm=" + firm + "]";
+		return "SearchProductNameListDTO [productId=" + productId + ", model=" + model + ", firm=" + firm + "]";
 	}
-	
-	
-	
+
 }

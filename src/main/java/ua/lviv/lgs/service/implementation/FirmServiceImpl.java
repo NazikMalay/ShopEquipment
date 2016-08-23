@@ -10,14 +10,12 @@ import ua.lviv.lgs.dao.FirmDao;
 import ua.lviv.lgs.entity.Firm;
 import ua.lviv.lgs.service.FirmService;
 
-
 @Service
 public class FirmServiceImpl implements FirmService {
 
-	
 	@Autowired
 	private FirmDao firmDao;
-	
+
 	@Transactional
 	public void addFirm(String firmName) {
 		Firm firm = new Firm(firmName);
@@ -29,12 +27,13 @@ public class FirmServiceImpl implements FirmService {
 	public void dellFirm(String firmname) {
 		for (Firm firm : firmDao.findAll()) {
 			if (firm.getFirmName().equalsIgnoreCase(firmname)) {
-				firmDao.delete(firm);;
+				firmDao.delete(firm);
+				;
 			}
 		}
 
 	}
-	
+
 	@Transactional
 	public void dellFirmId(Integer firmId) {
 		firmDao.delete(firmId);
@@ -52,19 +51,19 @@ public class FirmServiceImpl implements FirmService {
 		if (firm1.getFirmName() == null) {
 			System.out.println("firm does not exist ");
 		}
-			return firm1;
-		
+		return firm1;
+
 	}
+
 	@Transactional
 	public List<Firm> getAllFirms() {
 		return firmDao.findAll();
 	}
+
 	@Transactional
 	public String findNameById(Integer firmId) {
-	
-		return 	firmDao.findOne(firmId).getFirmName();
+
+		return firmDao.findOne(firmId).getFirmName();
 	}
-		
-	
 
 }

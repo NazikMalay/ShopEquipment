@@ -1,4 +1,4 @@
-	package ua.lviv.lgs.service.implementation;
+package ua.lviv.lgs.service.implementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.lviv.lgs.dao.UserDao;
 
-
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -24,23 +23,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UserDao userDao;
 
 	@Transactional
-	public UserDetails loadUserByUsername(String login)
-			throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		ua.lviv.lgs.entity.User user = null;
 		try {
 			user = userDao.findByLogin(login);
-			System.out.println(user.getEmail());
 		} catch (NoResultException e) {
-			System.out.println("No user found for username " + login +"'.");
+			System.out.println("No user found for username " + login + "'.");
 			return null;
 		}
-		
+
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		System.out.println(user.getNickName());
 		return new User(String.valueOf(user.getNickName()), user.getPassword(), authorities);
 	}
-	
-	
 
 }
